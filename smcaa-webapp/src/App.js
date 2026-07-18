@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import AnnouncementBanner from './Components/AnnouncementBanner';
 import HomePage from './Components/HomePage';
-import AboutPage from './Components/AboutPage';
 import Programs from './Components/Programs';
 import CommunityEventsPage from './Components/CommunityEventsPage';
 import ContactForm from './Components/ContactForm';
@@ -15,7 +14,6 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
         <Route path="/programs" element={<Programs />} />
         <Route path="/community-events" element={<CommunityEventsPage />} />
         <Route path="/contact" element={<ContactForm />} />
