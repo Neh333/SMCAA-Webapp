@@ -12,7 +12,7 @@ const TOPICS = [
   { value: "general question", label: "General Question" },
   { value: "sponsorship", label: "Sponsorship" },
   { value: "volunteer", label: "Volunteer" },
-  { value: "resource partnership", label: "Resource ParStnership" },
+ { value: "resource partnership", label: "Resource Partnership" },
   { value: "community outreach", label: "Community Outreach" }
 ];
 
