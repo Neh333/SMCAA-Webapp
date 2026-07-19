@@ -10,9 +10,19 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "smcaa-webapp",
   "compatibility_date": "2024-11-01",
+  // Keep the *.workers.dev URL working alongside the custom domain.
+  "workers_dev": true,
   "assets": {
     "directory": "./build",
     // Serve index.html for unmatched routes so client-side routing works.
     "not_found_handling": "single-page-application"
-  }
+  },
+  // Serve the Worker on the custom domain. On deploy, Cloudflare creates the
+  // proxied DNS record for the apex automatically (smcaa.net zone is on this
+  // account). www already has a proxied DNS record, so it uses a plain route
+  // (which reuses that record) instead of a custom domain.
+  "routes": [
+    { "pattern": "smcaa.net", "custom_domain": true },
+    { "pattern": "www.smcaa.net/*", "zone_name": "smcaa.net" }
+  ]
 }
