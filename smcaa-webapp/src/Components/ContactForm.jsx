@@ -12,9 +12,13 @@ const TOPICS = [
   { value: "general question", label: "General Question" },
   { value: "sponsorship", label: "Sponsorship" },
   { value: "volunteer", label: "Volunteer" },
-  { value: "resource partnership", label: "Resource Partnership" },
+  { value: "resource partnership", label: "Resource ParStnership" },
   { value: "community outreach", label: "Community Outreach" }
 ];
+
+// Web3Forms access keys are public by design (they only permit submitting to your
+// form), so it is safe to embed this in the client bundle.
+const WEB3FORMS_ACCESS_KEY = process.env.REACT_APP_WEB3FORMS_ACCESS_KEY;
 
 function ContactForm() {
   const [form, setForm] = useState(INITIAL_FORM);
@@ -39,7 +43,7 @@ function ContactForm() {
           "Content-Type": "application/json",
           Accept: "application/json"
         },
-        body: JSON.stringify({ access_key: "YOUR_ACCESS_KEY_HERE", ...form })
+        body: JSON.stringify({ ...form, access_key: WEB3FORMS_ACCESS_KEY })
       }).then((res) => res.json());
 
       if (res.success) {

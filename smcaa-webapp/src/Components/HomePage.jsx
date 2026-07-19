@@ -1,80 +1,25 @@
 import React from 'react';
 import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import ContactForm from './ContactForm';
+import EventCarousel from './EventCarousel';
 import { motion } from "framer-motion";
+import { sections, eventSection } from '../data/sections';
 import '../App.css';
 
-const sections = [
-  {
-    id: 'about',
-    title: 'About',
-    heading: 'Single Moms Can Achive All is dedicated to empowering single mothers and their families',
-    background: '#f3e5f5',
-    body: ' through community support, educational programs, and recreational activities.',
-    animation: {
-      initial: { hidden: true, opacity: 0, y: 60 },
-      whileInView: { opacity: 1, x: 0, y: 0, scale: 1 },
-      viewport: { once: false, amount: 0.3 },
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  },
-  {
-    id: 'programs',
-    title: 'Programs',
-    heading: 'Programs that equip single mothers with skills, resources, and confidence.',
-    background: '#e8eaf6',
-    body: 'Explore our seasonal leagues, skills clinics, and training programs designed for all ages and experience levels.',
-    animation: {
-      initial: { opacity: 0, x: -60 },
-      whileInView: { opacity: 1, x: 0, y: 0, scale: 1 },
-      viewport: { once: false, amount: 0.3 },
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  },
-  {
-    id: 'community-events',
-    title: 'Community Events',
-    heading: 'Events that bring single moms and their families together all year long.',
-    background: '#e0f7fa',
-    body: 'Join us for tournaments, fundraisers, and family-friendly gatherings held throughout the year.',
-    animation: {
-      initial: { opacity: 0, x: 60 },
-      whileInView: { opacity: 1, x: 0, y: 0, scale: 1 },
-      viewport: { once: false, amount: 0.3 },
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  },
-  {
-    id: 'support',
-    title: 'Support',
-    heading: 'Your support helps single mothers and their children thrive.',
-    background: '#242c4a',
-    body: 'Help SMCAA thrive through donations, sponsorships, and volunteering. Every contribution keeps our programs running.',
-    animation: {
-      initial: { opacity: 0, y: 60 },
-      whileInView: { opacity: 1, x: 0, y: 0, scale: 1 },
-      viewport: { once: false, amount: 0.3 },
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  },
-  {
-    id: 'contact',
-    title: 'Contact',
-    heading: 'Get in touch — we would love to hear from you.',
-    background: '#f1f8e9',
-    body: 'Have a question or want to get involved? Reach out and the SMCAA team will get back to you soon.',
-    animation: {
-      initial: { opacity: 0, scale: 0.9, y: 50 },
-      whileInView: { opacity: 1, x: 0, y: 0, scale: 1 },
-      viewport: { once: false, amount: 0.3 },
-      transition: { duration: 1, ease: 'easeOut' },
-    },
-  },
-];
+const alignmentToJustify = {
+  left: 'flex-start',
+  center: 'center',
+  right: 'flex-end',
+};
 
 function HomePage() {
   return (
     <>
+      <EventCarousel />
+
       <motion.section
         id="home"
         className="background"
@@ -87,6 +32,66 @@ function HomePage() {
       
       </motion.section>
 
+      {/* =====================================================================
+          EVENT — July 19, 2026 (7/19/26)  ·  EASY TO REMOVE
+          To take this event down, delete this entire block (through the
+          "END EVENT" comment) and, optionally, the `eventSection` export
+          in src/data/sections.js.
+      ===================================================================== */}
+      <motion.section
+        id={eventSection.id}
+        initial="hidden"
+        whileInView="visible"
+        viewport={eventSection.animation.viewport}
+        style={{
+          backgroundColor: eventSection.background,
+          color: eventSection.color,
+          padding: '56px 16px',
+          scrollMarginTop: '72px',
+        }}
+      >
+        <motion.div
+          variants={{
+            hidden: eventSection.animation.initial,
+            visible: eventSection.animation.whileInView,
+          }}
+          transition={eventSection.animation.transition}
+        >
+          <Container maxWidth="sm">
+            <Box sx={{ textAlign: 'center', color: 'inherit' }}>
+              <Typography
+                component="p"
+                sx={{ textTransform: 'uppercase', letterSpacing: '.14em', fontWeight: 800, fontSize: '.8rem', mb: 1, color: 'inherit' }}
+              >
+                {eventSection.kicker}
+              </Typography>
+              <Typography variant="h3" component="h2" sx={{ fontWeight: 700, mb: 1, color: 'inherit' }}>
+                {eventSection.title}
+              </Typography>
+              <Typography variant="h6" component="p" sx={{ mb: 2, color: 'inherit', opacity: 0.9 }}>
+                {eventSection.date}
+              </Typography>
+              <Typography variant="body1" sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 3, color: 'inherit' }}>
+                {eventSection.body}
+              </Typography>
+              <Button
+                variant="contained"
+                href={eventSection.cta.href}
+                sx={{
+                  backgroundColor: '#fff',
+                  color: eventSection.background,
+                  fontWeight: 700,
+                  '&:hover': { backgroundColor: '#f0e6f7' },
+                }}
+              >
+                {eventSection.cta.label}
+              </Button>
+            </Box>
+          </Container>
+        </motion.div>
+      </motion.section>
+      {/* ========================= END EVENT ========================= */}
+
       {sections.map((section) => (
         <motion.section
           key={section.id}
@@ -96,6 +101,7 @@ function HomePage() {
           viewport={section.animation.viewport}
           style={{
             backgroundColor: section.background,
+            color: section.color || 'inherit',
             minHeight: '60vh',
             padding: '64px 16px',
             scrollMarginTop: '72px',
@@ -108,12 +114,72 @@ function HomePage() {
             }}
             transition={section.animation.transition}
           >
-            <Container maxWidth="sm">
-              <h1 style={{ textAlign: 'center' }}>{section.title}</h1>
-              <h2 style={{ textAlign: 'center' }}>{section.heading}</h2>
-              <p style={{ textAlign: 'center', fontSize: '1.1rem', lineHeight: 1.6 }}>
-                {section.body}
-              </p>
+            <Container maxWidth="md">
+              <Box sx={{ textAlign: section.align || 'center', color: 'inherit' }}>
+                <Typography variant="h3" component="h2" gutterBottom sx={{ fontWeight: 700, color: 'inherit' }}>
+                  {section.title}
+                </Typography>
+                {section.heading && (
+                  <Typography variant="h6" component="p" sx={{ mb: 2, color: 'inherit', opacity: 0.9 }}>
+                    {section.heading}
+                  </Typography>
+                )}
+                {section.body && (
+                  <Typography variant="body1" sx={{ fontSize: '1.1rem', lineHeight: 1.7, color: 'inherit' }}>
+                    {section.body}
+                  </Typography>
+                )}
+                {section.bullets && (
+                  <Box
+                    component="ul"
+                    sx={{
+                      display: 'inline-block',
+                      textAlign: 'left',
+                      pl: 3,
+                      mt: 2,
+                      mb: 0,
+                      color: 'inherit',
+                    }}
+                  >
+                    {section.bullets.map((point, index) => (
+                      <Typography
+                        component="li"
+                        key={`${section.id}-bullet-${index}`}
+                        variant="body1"
+                        sx={{ fontSize: '1.05rem', lineHeight: 1.7, mb: 1, color: 'inherit' }}
+                      >
+                        {point}
+                      </Typography>
+                    ))}
+                  </Box>
+                )}
+              </Box>
+
+              {section.images?.map((image, index) => (
+                <div
+                  key={`${section.id}-image-${index}`}
+                  style={{
+                    display: 'flex',
+                    justifyContent: alignmentToJustify[image.alignment] || 'center',
+                    marginTop: 24,
+                  }}
+                >
+                  <motion.img
+                    src={`${process.env.PUBLIC_URL}${image.src}`}
+                    alt={image.alt}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={image.animation.viewport}
+                    variants={{
+                      hidden: image.animation.initial,
+                      visible: image.animation.whileInView,
+                    }}
+                    transition={image.animation.transition}
+                    style={{ maxWidth: image.maxWidth || '100%', height: 'auto', borderRadius: 8 }}
+                  />
+                </div>
+              ))}
+
               {section.id === 'contact' && <ContactForm />}
             </Container>
           </motion.div>

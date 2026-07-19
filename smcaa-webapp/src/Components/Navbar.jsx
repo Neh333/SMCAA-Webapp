@@ -1,4 +1,5 @@
 import { AppBar, Toolbar, Button, IconButton } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 function NavBar() {
   return (
@@ -11,9 +12,11 @@ function NavBar() {
             style={{ width: '40px', height: '40px' }}
           />
         </IconButton>
-        <Button color="inherit" href="#about">About</Button>
-        <Button color="inherit" href="#programs">Programs</Button>
-        <Button color="inherit" href="#community-events">Community Events</Button>
+        <Button color="inherit" href="#mission">Mission</Button>
+        <Button color="inherit" href="#vision">Vision</Button>
+        <Button color="inherit" href="#principles">Principles</Button>
+        <Button color="inherit" component={Link} to="/programs">Programs</Button>
+        <Button color="inherit" component={Link} to="/community-events">Community Events</Button>
         <Button color="inherit" href="#support">Support</Button>
         <Button color="inherit" href="#contact">Contact</Button>
       </Toolbar>
