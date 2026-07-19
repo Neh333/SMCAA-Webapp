@@ -1,4 +1,4 @@
----
+                                                                                                                                      `---
 description: "Use when deploying a Create React App (CRA) SPA to Cloudflare Pages or Workers Static Assets, or troubleshooting Cloudflare build/deploy failures: 'Could not read package.json' ENOENT, 'spawn react-scripts ENOENT', npm ci lockfile out-of-sync ('Missing X from lock file'), '_redirects Infinite loop detected [code 100324]', wrangler.jsonc setup, Root directory for subfolder apps, REACT_APP_ build-time env vars, or wrangler deploy auth."
 name: "Cloudflare Pages React"
 tools: [read, edit, search, execute, web]
