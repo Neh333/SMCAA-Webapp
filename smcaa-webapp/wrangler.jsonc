@@ -1,0 +1,18 @@
+{
+  // Cloudflare Workers Static Assets config for the SMCAA single-page app.
+  //
+  // Deploy flow (Cloudflare runs these for you):
+  //   Build command:  npm run build     -> outputs the static site to ./build
+  //   Deploy command: npx wrangler deploy
+  //
+  // This is an assets-only Worker (no server code) — the contact form submits
+  // directly to Web3Forms from the browser, so nothing runs server-side.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "smcaa-webapp",
+  "compatibility_date": "2024-11-01",
+  "assets": {
+    "directory": "./build",
+    // Serve index.html for unmatched routes so client-side routing works.
+    "not_found_handling": "single-page-application"
+  }
+}
